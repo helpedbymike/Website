@@ -19,7 +19,28 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-For GitHub Pages, point Pages at this branch's root — there is nothing to build.
+### Deploying
+
+There is no build step, so every host is the same: publish the repo root.
+
+**Netlify, drag and drop** — unzip the deploy folder and drag it onto
+<https://app.netlify.com/drop>. That folder is just `index.html`, `css/`,
+`js/`, `assets/`, `vendor/` and `netlify.toml`; you can also make it yourself
+with:
+
+```bash
+mkdir -p ../full-custody-site
+cp -r index.html css js assets vendor netlify.toml ../full-custody-site/
+```
+
+**Netlify, connected to Git** — point it at this branch and accept the
+defaults. `netlify.toml` already sets the publish directory to the repo root,
+leaves the build command empty, and sets cache headers for `vendor/`.
+
+**GitHub Pages** — point Pages at this branch's root. Nothing to build.
+
+One requirement on any host: the site uses ES modules, so it must be served
+over HTTP(S). That is true of all three above.
 
 ---
 

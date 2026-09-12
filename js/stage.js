@@ -14,7 +14,7 @@ import { garmentTexture, fabricNormalMap, COLORWAYS } from './fabric.js';
 const SHOTS = {
   hero:   { pos: [0.0, 0.35, 6.0],  look: [-1.42, 0.05, 0], fov: 34, spin: 0.12, key: 0.7 },
   gate:   { pos: [0.0, 0.20, 12.0], look: [0.0, 1.25, 0], fov: 32, spin: 0.07, key: 0.5 },
-  studio: { pos: [0.0, 0.12, 5.05],  look: [0, 0.02, 0], fov: 36, spin: 0.04, key: 1.00 },
+  studio: { pos: [0.0, 0.02, 4.40], look: [0.03, -0.14, 0], fov: 38, spin: 0.04, key: 1.18, lift: true },
   detail: { pos: [0.95, 0.62, 1.9], look: [0.42, 0.46, 0.35], fov: 30, spin: 0.0, key: 1.15 },
   wide:   { pos: [0.0, 0.10, 10.5], look: [0, 1.05, 0], fov: 30, spin: 0.10, key: 0.45 }
 };
@@ -272,8 +272,11 @@ export class Stage {
     this.composer.setSize(w, h);
     this.camera.aspect = w / h;
     // keep the garment in frame on narrow screens
-    this.frameBias = w / h < 0.85 ? 1.8 : w / h < 1.2 ? 1.3 : 1;
+    this.frameBias = w / h < 0.85 ? 2.15 : w / h < 1.2 ? 1.35 : 1;
     this.shiftScale = w / h < 1.15 ? 0 : 1;
+    // stacked layouts put the controls under the stage, so aim lower and let
+    // the garment ride up into the space above them
+    this.liftY = w / h < 1.15 ? -0.55 : 0;
     this.camera.updateProjectionMatrix();
   }
 
@@ -289,7 +292,9 @@ export class Stage {
       new THREE.Vector3(target.pos[0], target.pos[1], target.pos[2] * bias), k
     );
     const sx = this.shiftScale === undefined ? 1 : this.shiftScale;
-    this.lookAt.lerp(new THREE.Vector3(target.look[0] * sx, target.look[1], target.look[2]), k);
+    const lift = target.lift ? (this.liftY || 0) : 0;
+    this.lookAt.lerp(
+      new THREE.Vector3(target.look[0] * sx, target.look[1] + lift, target.look[2]), k);
     this.camera.lookAt(this.lookAt);
     this.camera.fov += (target.fov - this.camera.fov) * k;
     this.camera.updateProjectionMatrix();
