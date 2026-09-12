@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 250" width="200" height="250" role="img" aria-label="Full Custody crest">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%"   stop-color="#fdf0c4"/>
+      <stop offset="18%"  stop-color="#f2cf7d"/>
+      <stop offset="42%"  stop-color="#c9992f"/>
+      <stop offset="58%"  stop-color="#8d6118"/>
+      <stop offset="76%"  stop-color="#e8c268"/>
+      <stop offset="100%" stop-color="#fbeab3"/>
+    </linearGradient>
+    <linearGradient id="goldDeep" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%"   stop-color="#8d6118"/>
+      <stop offset="50%"  stop-color="#d8ab44"/>
+      <stop offset="100%" stop-color="#6d4a10"/>
+    </linearGradient>
+  </defs>
+
+  <!-- crown -->
+  <g fill="url(#gold)" stroke="url(#goldDeep)" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M30 62 L23 24 L59 46 L100 14 L141 46 L177 24 L170 62 Z"/>
+    <circle cx="23" cy="19" r="8"/>
+    <circle cx="177" cy="19" r="8"/>
+    <circle cx="100" cy="9" r="9"/>
+    <circle cx="59" cy="42" r="5.5"/>
+    <circle cx="141" cy="42" r="5.5"/>
+  </g>
+
+  <!-- shield -->
+  <path d="M18 74 H182 V152 L100 236 L18 152 Z"
+        fill="url(#goldDeep)" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M29 84 H171 V147 L100 220 L29 147 Z"
+        fill="#0a0a0a" stroke="url(#gold)" stroke-width="2.5" stroke-linejoin="round" opacity="0.95"/>
+
+  <!-- FC monogram -->
+  <g fill="url(#gold)" stroke="url(#goldDeep)" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M47 102 H95 V117 H63 V130 H89 V145 H63 V176 H47 Z"/>
+    <path d="M155 102 H111 Q103 102 103 112 V166 Q103 176 111 176 H155 V161 H119 V117 H155 Z"/>
+  </g>
+</svg>

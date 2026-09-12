@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Full Custody — Own What Matters.</title>
+<meta name="description" content="Full Custody is a premium apparel brand built on eight paths: Family, Discipline, Purpose, Faith, Freedom, Passion, Growth and Legacy. Choose the one you're carrying and see it on a tee, hoodie or jacket in 3D.">
+<meta name="theme-color" content="#050507">
+<link rel="icon" href="assets/logo-fc.svg" type="image/svg+xml">
+
+<meta property="og:title" content="Full Custody — Own What Matters.">
+<meta property="og:description" content="Eight paths. One mindset. Find the one you're carrying.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/jsm/"
+  }
+}
+</script>
+</head>
+<body class="is-loading">
+
+<!-- ───────────────── loader ───────────────── -->
+<div id="loader" aria-hidden="true">
+  <img src="assets/logo-fc.svg" alt="" class="loader-crest">
+  <div class="loader-bar"><span id="loader-fill"></span></div>
+  <p class="loader-word">OWN WHAT MATTERS.</p>
+</div>
+
+<!-- ───────────────── 3D stage ───────────────── -->
+<div id="stage-wrap">
+  <canvas id="stage" aria-label="Rotating 3D preview of the selected garment" role="img"></canvas>
+  <div id="stage-hint" class="stage-hint">drag to turn</div>
+</div>
+
+<!-- ───────────────── nav ───────────────── -->
+<header class="nav">
+  <a class="nav-brand" href="#top">
+    <img src="assets/logo-fc.svg" alt="Full Custody">
+    <span>FULL CUSTODY</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#feel">Find your path</a>
+    <a href="#studio">Studio</a>
+    <a href="#collection">The eight</a>
+    <a href="#craft">Craft</a>
+  </nav>
+  <a class="nav-cta" href="#studio">Build yours</a>
+</header>
+
+<main id="top">
+
+  <!-- ───────────────── hero ───────────────── -->
+  <section id="hero" class="section section--hero" data-shot="hero">
+    <div class="hero-inner">
+      <p class="eyebrow reveal">Premium embroidery · Eight paths · One mindset</p>
+      <h1 class="hero-title reveal">
+        <span class="line">FULL</span>
+        <span class="line">CUSTODY</span>
+      </h1>
+      <p class="hero-sub reveal">Own what matters.</p>
+      <p class="hero-body reveal">
+        Custody is not a word about losing something. It is a word about holding it.
+        Eight paths, one mindset — pick the thing you refuse to put down, and wear it.
+      </p>
+      <div class="hero-actions reveal">
+        <a class="btn btn--gold" href="#feel">What am I carrying?</a>
+        <a class="btn btn--ghost" href="#studio">Go to the studio</a>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span></span>SCROLL</div>
+  </section>
+
+  <!-- ───────────────── the feel gate ───────────────── -->
+  <section id="feel" class="section section--gate" data-shot="gate">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="eyebrow">01 — The gate</p>
+        <h2>What are you in full custody of?</h2>
+        <p class="sec-lede">
+          Don't overthink it. Pick up to three that are loudest right now and we'll
+          point you at the path you're already walking.
+        </p>
+      </header>
+
+      <div id="feelings" class="feelings reveal" role="group" aria-label="How you feel right now"></div>
+
+      <div class="gate-actions reveal">
+        <button id="reveal-btn" class="btn btn--gold" disabled>Reveal my path</button>
+        <button id="reset-btn" class="btn btn--text" hidden>Start over</button>
+        <p id="gate-count" class="gate-count">0 of 3 chosen</p>
+      </div>
+
+      <div id="result" class="result" hidden aria-live="polite">
+        <div class="result-art"><canvas id="result-canvas" width="512" height="512" aria-hidden="true"></canvas></div>
+        <div class="result-copy">
+          <p class="eyebrow">Your path</p>
+          <h3 id="result-name">—</h3>
+          <p id="result-line" class="result-line"></p>
+          <p id="result-blurb" class="result-blurb"></p>
+          <p id="result-creed" class="result-creed"></p>
+          <div id="result-bars" class="bars"></div>
+          <button id="result-cta" class="btn btn--gold">Put it on a garment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── studio ───────────────── -->
+  <section id="studio" class="section section--studio" data-shot="studio">
+    <div class="studio-grid">
+
+      <div class="panel panel--left reveal">
+        <p class="eyebrow">02 — The studio</p>
+        <h2 class="panel-title">Build it</h2>
+
+        <fieldset class="field">
+          <legend>Garment</legend>
+          <div id="garment-picker" class="seg" role="radiogroup" aria-label="Garment"></div>
+          <p id="garment-spec" class="field-note"></p>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Colourway</legend>
+          <div id="color-picker" class="swatches" role="radiogroup" aria-label="Colourway"></div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Size</legend>
+          <div id="size-picker" class="seg seg--sizes" role="radiogroup" aria-label="Size"></div>
+        </fieldset>
+      </div>
+
+      <div class="studio-stagegap" aria-hidden="true"></div>
+
+      <div class="panel panel--right reveal">
+        <fieldset class="field">
+          <legend>Your path</legend>
+          <div id="path-picker" class="paths" role="radiogroup" aria-label="Path design"></div>
+        </fieldset>
+
+        <div class="summary">
+          <h3 id="sum-title">—</h3>
+          <p id="sum-line" class="sum-line"></p>
+          <dl class="sum-spec">
+            <div><dt>Front</dt><dd>Left-chest crest, gold embroidery</dd></div>
+            <div><dt>Back</dt><dd id="sum-back">—</dd></div>
+            <div><dt>Fabric</dt><dd id="sum-fabric">—</dd></div>
+          </dl>
+          <div class="sum-buy">
+            <span id="sum-price" class="price">—</span>
+            <button id="add-btn" class="btn btn--gold">Add to bag</button>
+          </div>
+          <p class="field-note">Drag the garment to turn it. Prices in USD.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── collection ───────────────── -->
+  <section id="collection" class="section section--collection" data-shot="wide">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="eyebrow">03 — The collection</p>
+        <h2>Eight paths. One mindset.</h2>
+        <p class="sec-lede">
+          Each design holds a whole world in one hand. Tap any of them to load it into the studio.
+        </p>
+      </header>
+      <div id="collection-grid" class="collection-grid"></div>
+      <p class="collection-foot reveal">— Different paths. One mindset. —</p>
+    </div>
+  </section>
+
+  <!-- ───────────────── craft ───────────────── -->
+  <section id="craft" class="section section--craft" data-shot="detail">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="eyebrow">04 — The craft</p>
+        <h2>Made to be kept.</h2>
+      </header>
+      <div class="craft-grid">
+        <article class="craft-card reveal">
+          <span class="craft-no">i</span>
+          <h3>Gold thread, not gold ink</h3>
+          <p>The left-chest crest is a raised satin-stitch embroidery in metallic gold — 9,400 stitches, edge-bound so it never frays out of shape.</p>
+        </article>
+        <article class="craft-card reveal">
+          <span class="craft-no">ii</span>
+          <h3>Back print that survives</h3>
+          <p>A 12-inch water-based discharge print that sinks into the fibre instead of sitting on top of it. Softer on day one, still there on year five.</p>
+        </article>
+        <article class="craft-card reveal">
+          <span class="craft-no">iii</span>
+          <h3>Weight you can feel</h3>
+          <p>240 GSM ringspun cotton on the tee. 450 GSM brushed fleece on the hoodie. A waxed shell with a quilted lining on the jacket.</p>
+        </article>
+        <article class="craft-card reveal">
+          <span class="craft-no">iv</span>
+          <h3>Garment dyed, pre-shrunk</h3>
+          <p>Dyed after construction so the colour settles into the seams, then washed down so the fit you buy is the fit you keep.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── creed ───────────────── -->
+  <section id="creed" class="section section--creed" data-shot="wide">
+    <div class="wrap creed-wrap">
+      <img src="assets/logo-fc.svg" alt="" class="creed-crest reveal">
+      <h2 class="reveal">The creed</h2>
+      <p class="creed-text reveal">
+        Nobody hands you custody of your life. You take it.
+        You take it on the mornings that argue with you, in the years nobody claps for,
+        in the rooms where it would be easier to let go of the wheel.
+      </p>
+      <p class="creed-text reveal">
+        Family. Discipline. Purpose. Faith. Freedom. Passion. Growth. Legacy.
+        Eight ways of saying the same thing — <em>this one is mine, and I am not putting it down.</em>
+      </p>
+      <p class="creed-sign reveal">OWN WHAT MATTERS.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <img src="assets/logo-fc.svg" alt="Full Custody" class="footer-crest">
+      <p class="footer-tag">Own what matters.</p>
+    </div>
+    <nav aria-label="Footer">
+      <h4>Shop</h4>
+      <a href="#studio">Tees</a><a href="#studio">Hoodies</a><a href="#studio">Jackets</a><a href="#collection">The eight paths</a>
+    </nav>
+    <nav aria-label="Brand">
+      <h4>Brand</h4>
+      <a href="#creed">The creed</a><a href="#craft">Craft</a><a href="#feel">Find your path</a>
+    </nav>
+    <div>
+      <h4>Stay in it</h4>
+      <form id="signup" class="signup">
+        <label class="sr-only" for="email">Email address</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+        <button class="btn btn--gold btn--sm" type="submit">Join</button>
+      </form>
+      <p id="signup-note" class="field-note">Drop releases and path stories. No noise.</p>
+    </div>
+  </div>
+  <p class="footer-legal">© <span id="year"></span> Full Custody. Own What Matters.® — Different paths. One mindset.</p>
+</footer>
+
+<!-- bag confirmation -->
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="module" src="js/app.js"></script>
+<noscript>
+  <style>#loader{display:none}#stage-wrap{display:none}body{overflow:auto}</style>
+  <p style="padding:2rem;color:#e8d9b5;font-family:system-ui">
+    Full Custody — eight paths, one mindset. This site's 3D studio needs JavaScript enabled.
+  </p>
+</noscript>
+</body>
+</html>
